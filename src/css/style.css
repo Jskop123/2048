@@ -1,4 +1,16 @@
-body {
-  background-color: green;
-  color: yellow;
+.container {
+  width: 457px;
+  background-color: #CDC1B4;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 108px);
+  margin: auto;
+  border: 5px solid #BBADA0;
+}
+
+.box {
+  border: 5px solid #BBADA0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
