@@ -1,5 +1,4 @@
 import './css/style.css'
-import properArray from './js/mechanism'
 
 let array = [
   [2, 2, 4, 4],
@@ -45,11 +44,10 @@ const summedElements = (array) => {
 const boxes = [...document.querySelectorAll('.box')]
 
 const reloadArray = (array) => {
-  console.log(array)
-  const iterableVar = array.join(',')
+  const iterableVar = array.flat(1)
   boxes.forEach((box, i) => {
-    if(iterableVar[i*2] !== '0'){
-      box.innerHTML = iterableVar[i*2]
+    if(iterableVar[i] !== '0'){
+      box.innerHTML = iterableVar[i]
     }
     else{
       box.innerHTML = ''
@@ -60,8 +58,7 @@ const reloadArray = (array) => {
 reloadArray(arrayCopy)
 
 
-const swipeLeft = () => {
-  let array = properArray(arrayCopy)
+const swipeLeft = (array) => {
   const swipeLeftArray = array.map(element => {
     while (element.length < 4) {
       element.push(0)
@@ -71,9 +68,7 @@ const swipeLeft = () => {
   return swipeLeftArray
 }
 
-
-const swipeRight = () => {
-  const array = properArray(arrayCopy)
+const swipeRight = (array) => {
   const swipeRightArray = array.map(element => {
     while (element.length < 4) {
       element.unshift(0)
@@ -86,21 +81,18 @@ const swipeRight = () => {
 const transpose = array => array[0].map((x, i) => array.map(x => x[i]))
 
 const swipeUp = (array) => {
-  const transposedArray = transpose(array)
-  const properArr = properArray(transposedArray)
-  const swipeUpArray = properArr.map(element => {
+  const swipeUpArray = array.map(element => {
     while (element.length < 4) {
       element.push(0)
     }
     return element
   })
-  return transpose(swipeUpArray)
+  const result = transpose(swipeUpArray)
+  return result
 }
 
 const swipeDown = (array) => {
-  const transposedArray = transpose(array)
-  const properArr = properArray(transposedArray)
-  const swipeDownArray = properArr.map(element => {
+  const swipeDownArray = array.map(element => {
     while (element.length < 4) {
       element.unshift(0)
     }
@@ -111,30 +103,36 @@ const swipeDown = (array) => {
 
 window.addEventListener('keydown', event => {
   if(event.keyCode===37){
-    const newArray = swipeLeft()
-    //console.log(newArray)
-    array = newArray
-    reloadArray(newArray)
+    const rmZeros = removedZeros(arrayCopy)
+    const sumEls = summedElements(rmZeros)
+    const result = swipeLeft(sumEls)
+    arrayCopy = result
+    reloadArray(result)
   }
   if(event.keyCode===39){
-    const newArray = swipeRight()
-    //console.log(newArray)
-    array = newArray
-    reloadArray(newArray)
+    const rmZeros = removedZeros(arrayCopy)
+    const sumEls = summedElements(rmZeros)
+    const result = swipeRight(sumEls)
+    arrayCopy = result
+    reloadArray(result)
   }
   if(event.keyCode===38){
-    const newArray = swipeUp()
-    //console.log(newArray)
-    array = newArray
-    reloadArray(newArray)
+    const transposed = transpose(arrayCopy)
+    const rmZeros = removedZeros(transposed)
+    const sumEls = summedElements(rmZeros)
+    const result = swipeUp(sumEls)
+    arrayCopy = result
+    reloadArray(result)
   }
   if(event.keyCode===40){
-    const newArray = swipeDown()
-    //console.log(newArray)
-    array = newArray
-    reloadArray(newArray)
+    const transposed = transpose(arrayCopy)
+    const rmZeros = removedZeros(transposed)
+    const sumEls = summedElements(rmZeros)
+    const result = swipeDown(sumEls)
+    arrayCopy = result
+    reloadArray(result)
   }
-  console.log(array)
+  console.log(arrayCopy)
 })
 
 
