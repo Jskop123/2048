@@ -1,10 +1,10 @@
 import './css/style.css'
 
 let array = [
-  [2, 4, 4, 4],
-  [4, 2, 2, 4],
-  [4, 2, 4, 2],
-  [4, 4, 4, 4]
+  [2, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0]
 ]
 
 let arrayCopy = [...array]
@@ -43,7 +43,7 @@ const summedElementsLeft = (array) => {
 
 const summedElementsRight = (array) => {
   const sumElementsArray = array.map(element => {
-    const reversElement = element.reverse()
+    element.reverse()
     const answersArray = []
     for (let i = 0; i < 4; i++) {
       if (element[i] === element[i + 1] && element[i] !== 0) {
@@ -118,15 +118,24 @@ const swipeDown = (array) => {
   return transpose(swipeDownArray)
 }
 
-const addNumberAfterSwipe = (array) => {
-  const number = 2
-  for(let i=0; i<16; i++){
-    const rand1 = Math.round(Math.random()*3)
-    const rand2 = Math.round(Math.random()*3)
-    if(array[rand1][rand2]===0){
-      array[rand1][rand2] = number
+const zerosPosition = array => {
+  const zerosArray = []
+  for(let i=0; i<4; i++){
+    for(let j=0; j<4; j++){
+      if(!array[i][j]) zerosArray.push({row: i, col: j})
     }
   }
+  return zerosArray
+}
+
+const addFollowingNr = (zeros, array) => {
+  const number = 2
+  const rand = Math.floor(Math.random()*zeros.length)
+  const row = zeros[rand].row
+  const col = zeros[rand].col
+  array[row][col] = number
+  zeros.splice(rand, 1)  
+  return array
 }
 
 window.addEventListener('keydown', event => {
@@ -136,7 +145,9 @@ window.addEventListener('keydown', event => {
     const result = swipeLeft(sumEls)
     arrayCopy = result
     reloadArray(result)
-    //addNumberAfterSwipe(arrayCopy)
+    const zerosPos = zerosPosition(arrayCopy)
+    addFollowingNr(zerosPos, arrayCopy)
+    reloadArray(arrayCopy)
   }
   if(event.keyCode===39){
     const rmZeros = removedZeros(arrayCopy)
@@ -144,7 +155,9 @@ window.addEventListener('keydown', event => {
     const result = swipeRight(sumEls)
     arrayCopy = result
     reloadArray(result)
-    //addNumberAfterSwipe(arrayCopy)
+    const zerosPos = zerosPosition(arrayCopy)
+    addFollowingNr(zerosPos, arrayCopy)
+    reloadArray(arrayCopy)
   }
   if(event.keyCode===38){
     const transposed = transpose(arrayCopy)
@@ -153,7 +166,9 @@ window.addEventListener('keydown', event => {
     const result = swipeUp(sumEls)
     arrayCopy = result
     reloadArray(result)
-    //addNumberAfterSwipe(arrayCopy)
+    const zerosPos = zerosPosition(arrayCopy)
+    addFollowingNr(zerosPos, arrayCopy)
+    reloadArray(arrayCopy)
   }
   if(event.keyCode===40){
     const transposed = transpose(arrayCopy)
@@ -162,6 +177,8 @@ window.addEventListener('keydown', event => {
     const result = swipeDown(sumEls)
     arrayCopy = result
     reloadArray(result)
-    //addNumberAfterSwipe(arrayCopy)
+    const zerosPos = zerosPosition(arrayCopy)
+    addFollowingNr(zerosPos, arrayCopy)
+    reloadArray(arrayCopy)
   }
 })
