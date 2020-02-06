@@ -1,4 +1,5 @@
 import './css/style.css'
+const cloneDeep = require('lodash.clonedeep');
 
 let array = [
   [2, 0, 0, 0],
@@ -7,7 +8,9 @@ let array = [
   [0, 0, 0, 0]
 ]
 
-let arrayCopy = [...array]
+let arrayCopy = cloneDeep(array)
+
+
 
 const removedZeros = (array) => {
   const arrayWithoutZeros = array.map(element => {
@@ -21,7 +24,7 @@ const removedZeros = (array) => {
   })
   return arrayWithoutZeros
 }
-  
+
 const isNumber = item => typeof item === 'number' ? true : false
 
 const summedElementsLeft = (array) => {
@@ -65,10 +68,10 @@ const boxes = [...document.querySelectorAll('.box')]
 const reloadArray = (array) => {
   const iterableVar = array.flat(1)
   boxes.forEach((box, i) => {
-    if(iterableVar[i] !== 0){
+    if (iterableVar[i] !== 0) {
       box.innerHTML = iterableVar[i]
     }
-    else{
+    else {
       box.innerHTML = ''
     }
   })
@@ -120,9 +123,9 @@ const swipeDown = (array) => {
 
 const zerosPosition = array => {
   const zerosArray = []
-  for(let i=0; i<4; i++){
-    for(let j=0; j<4; j++){
-      if(!array[i][j]) zerosArray.push({row: i, col: j})
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (!array[i][j]) zerosArray.push({ row: i, col: j })
     }
   }
   return zerosArray
@@ -130,36 +133,47 @@ const zerosPosition = array => {
 
 const addFollowingNr = (zeros, array) => {
   const number = 2
-  const rand = Math.floor(Math.random()*zeros.length)
+  const rand = Math.floor(Math.random() * zeros.length)
   const row = zeros[rand].row
   const col = zeros[rand].col
   array[row][col] = number
-  zeros.splice(rand, 1)  
+  zeros.splice(rand, 1)
   return array
 }
 
+const compareArray = (a, b) => {
+  if (JSON.stringify(a) == JSON.stringify(b)) return true
+  else return false
+}
+
+const addingNumberDecition = (a, b, c) => {
+  if (!compareArray(a, b)) addFollowingNr(c, b)  
+}
+
 window.addEventListener('keydown', event => {
-  if(event.keyCode===37){
+  if (event.keyCode === 37) {
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsLeft(rmZeros)
     const result = swipeLeft(sumEls)
     arrayCopy = result
     reloadArray(result)
     const zerosPos = zerosPosition(arrayCopy)
-    addFollowingNr(zerosPos, arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(event.keyCode===39){
+  if (event.keyCode === 39) {
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsRight(rmZeros)
     const result = swipeRight(sumEls)
     arrayCopy = result
     reloadArray(result)
     const zerosPos = zerosPosition(arrayCopy)
-    addFollowingNr(zerosPos, arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(event.keyCode===38){
+  if (event.keyCode === 38) {
     const transposed = transpose(arrayCopy)
     const rmZeros = removedZeros(transposed)
     const sumEls = summedElementsLeft(rmZeros)
@@ -167,10 +181,11 @@ window.addEventListener('keydown', event => {
     arrayCopy = result
     reloadArray(result)
     const zerosPos = zerosPosition(arrayCopy)
-    addFollowingNr(zerosPos, arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(event.keyCode===40){
+  if (event.keyCode === 40) {
     const transposed = transpose(arrayCopy)
     const rmZeros = removedZeros(transposed)
     const sumEls = summedElementsRight(rmZeros)
@@ -178,7 +193,9 @@ window.addEventListener('keydown', event => {
     arrayCopy = result
     reloadArray(result)
     const zerosPos = zerosPosition(arrayCopy)
-    addFollowingNr(zerosPos, arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
+
 })
