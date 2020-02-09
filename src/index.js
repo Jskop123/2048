@@ -150,7 +150,38 @@ const addingNumberDecition = (a, b, c) => {
   if (!compareArray(a, b)) addFollowingNr(c, b)  
 }
 
+const similarItems = array => {
+  let isSimilar = false
+  array.forEach(arr => {
+    for(let i=0; i<3; i++){
+      if(arr[i]===arr[i+1] && arr[i] !== 0) isSimilar = true
+    }
+  })
+  return isSimilar
+}
+
+const similarElements = array => {
+  const trans = transpose(array)
+  if(similarItems(array) || similarItems(trans)) return true
+  return false
+}
+
+
+const gameOverAlert = array => {
+  let noZero = true
+  let simEls = true
+  array.forEach(arr => {
+    if(arr.includes(0)) noZero = false
+  })
+  if(similarElements(array)) simEls = false 
+  if(noZero && simEls) return true
+  else return false
+}
+
+
 window.addEventListener('keydown', event => {
+  if(gameOverAlert(array)) alert('Game Over')
+
   if (event.keyCode === 37) {
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsLeft(rmZeros)
@@ -197,5 +228,4 @@ window.addEventListener('keydown', event => {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-
 })
