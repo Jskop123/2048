@@ -1,18 +1,47 @@
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  background-color: #FAF8EF;
+}
 .container {
-  width: 457px;
+  width: 345px;
   background-color: #CDC1B4;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 108px);
+  grid-template-rows: repeat(4, 80px);
   margin: auto;
   border: 5px solid #BBADA0;
 }
 
-.box {
-  border: 5px solid #BBADA0;
+header {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4em;
 }
 
+#actualScore {
+  background-color: #aaa;
+  text-align: center;
+}
+
+#actualScore h3 {
+  font-size: 16px;
+}
+
+
+#newGame {
+  background-color: #f00;
+  color: #F9F6F2;
+  margin: 1% 4%;
+  border-radius: 2px;
+  border: transparent;
+  padding: 5px 10px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .5px;
+}
+
+#newGame:hover {
+  background-color: #f44;
+  color: #F9F8F4;
+  cursor: pointer;
+}

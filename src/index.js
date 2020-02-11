@@ -1,5 +1,7 @@
-import './css/style.css'
 const cloneDeep = require('lodash.clonedeep');
+import './css/style.css'
+import './css/boxColors.css'
+import resetGame from './js/resetGame'
 
 let array = [
   [2, 0, 0, 0],
@@ -9,7 +11,7 @@ let array = [
 ]
 
 let arrayCopy = cloneDeep(array)
-
+const boxes = [...document.querySelectorAll('.box')]
 
 
 const removedZeros = (array) => {
@@ -27,12 +29,17 @@ const removedZeros = (array) => {
 
 const isNumber = item => typeof item === 'number' ? true : false
 
+let scoreCounter = 0
+
 const summedElementsLeft = (array) => {
   const sumElementsArray = array.map(element => {
     const answersArray = []
     for (let i = 0; i < 4; i++) {
       if (element[i] === element[i + 1] && element[i] !== 0) {
-        if (isNumber(element[i])) answersArray.push(element[i] += element[i + 1])
+        if (isNumber(element[i])) {
+          answersArray.push(element[i] += element[i + 1])
+          scoreCounter += element[i]
+        }
         element.splice(element.indexOf(element[i + 1]), 1)
       }
       else {
@@ -50,7 +57,10 @@ const summedElementsRight = (array) => {
     const answersArray = []
     for (let i = 0; i < 4; i++) {
       if (element[i] === element[i + 1] && element[i] !== 0) {
-        if (isNumber(element[i])) answersArray.push(element[i] += element[i + 1])
+        if (isNumber(element[i])){
+          answersArray.push(element[i] += element[i + 1])
+          scoreCounter += element[i]
+        }
         element.splice(element.indexOf(element[i + 1]), 1)
       }
       else {
@@ -61,9 +71,6 @@ const summedElementsRight = (array) => {
   })
   return sumElementsArray
 }
-
-
-const boxes = [...document.querySelectorAll('.box')]
 
 const reloadArray = (array) => {
   const iterableVar = array.flat(1)
@@ -178,10 +185,22 @@ const gameOverAlert = array => {
   else return false
 }
 
+const manageClasses = elements => {
+  elements.forEach(element => {
+    const value = element.innerText*1
+    element.classList = 'box'
+    for(let i=2; i<4096; i=i*2){
+      if(value === i){
+        element.classList += ` box${i}`
+      }
+    }
+  })
+}
 
+const displayScore = document.querySelector('#actualScore h2')
+
+manageClasses(boxes)
 window.addEventListener('keydown', event => {
-  if(gameOverAlert(array)) alert('Game Over')
-
   if (event.keyCode === 37) {
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsLeft(rmZeros)
@@ -228,4 +247,17 @@ window.addEventListener('keydown', event => {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
+  if(gameOverAlert(array)) alert('Game Over')
+  manageClasses(boxes)
+  displayScore.innerText = scoreCounter
 })
+
+const newGame = document.querySelector('#newGame')
+newGame.addEventListener('click', () => {
+  resetGame(array, boxes)
+  const newArr = reloadArray(array)
+  array = cloneDeep(newArr)
+})
+
+
+
