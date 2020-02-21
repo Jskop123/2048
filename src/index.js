@@ -1,17 +1,38 @@
 const cloneDeep = require('lodash.clonedeep');
+
 import './css/style.css'
 import './css/boxColors.css'
+import './css/modal.css'
+
 import resetGame from './js/resetGame'
+import {openModal, closeModal}  from './js/modal'
+import randomPlace from './js/randomPlace'
+
+closeModal()
 
 let array = [
-  [2, 0, 0, 0],
+  [0, 0, 2, 0],
   [0, 0, 0, 0],
   [0, 0, 0, 0],
   [0, 0, 0, 0]
 ]
 
 let arrayCopy = cloneDeep(array)
+
+
+
 const boxes = [...document.querySelectorAll('.box')]
+
+
+const chunkArray = array => {
+  const arrayLength = array.length;
+  const tempArray = [];
+  for (let i = 0; i < arrayLength; i += 4) {
+      const myChunk = array.slice(i, i+4);
+      tempArray.push(myChunk);
+  }
+  return tempArray;
+}
 
 
 const removedZeros = (array) => {
@@ -198,6 +219,7 @@ const manageClasses = elements => {
 }
 
 const displayScore = document.querySelector('#actualScore h2')
+const modalScore = document.querySelector('#modal-content h2')
 
 manageClasses(boxes)
 window.addEventListener('keydown', event => {
@@ -247,17 +269,72 @@ window.addEventListener('keydown', event => {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(gameOverAlert(array)) alert('Game Over')
+  if(gameOverAlert(array)) openModal()
   manageClasses(boxes)
   displayScore.innerText = scoreCounter
+  modalScore.innerText = scoreCounter
 })
 
 const newGame = document.querySelector('#newGame')
 newGame.addEventListener('click', () => {
-  resetGame(array, boxes)
-  const newArr = reloadArray(array)
-  array = cloneDeep(newArr)
+  const reset = resetGame(array)
+  array = cloneDeep(reset)
 })
+
+
+const hammertime = new Hammer(window);
+hammertime.on('pan', function(ev) {
+	if(ev.additionalEvent === 'panleft'){
+    const rmZeros = removedZeros(arrayCopy)
+    const sumEls = summedElementsLeft(rmZeros)
+    const result = swipeLeft(sumEls)
+    arrayCopy = result
+    reloadArray(result)
+    const zerosPos = zerosPosition(arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
+    reloadArray(arrayCopy)
+  }
+  if(ev.additionalEvent === 'panright'){
+    const rmZeros = removedZeros(arrayCopy)
+    const sumEls = summedElementsRight(rmZeros)
+    const result = swipeRight(sumEls)
+    arrayCopy = result
+    reloadArray(result)
+    const zerosPos = zerosPosition(arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
+    reloadArray(arrayCopy)
+  }
+  if(ev.additionalEvent === 'panup'){
+    const transposed = transpose(arrayCopy)
+    const rmZeros = removedZeros(transposed)
+    const sumEls = summedElementsLeft(rmZeros)
+    const result = swipeUp(sumEls)
+    arrayCopy = result
+    reloadArray(result)
+    const zerosPos = zerosPosition(arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
+    reloadArray(arrayCopy)
+  }
+  if(ev.additionalEvent === 'pandown'){
+    const transposed = transpose(arrayCopy)
+    const rmZeros = removedZeros(transposed)
+    const sumEls = summedElementsRight(rmZeros)
+    const result = swipeDown(sumEls)
+    arrayCopy = result
+    reloadArray(result)
+    const zerosPos = zerosPosition(arrayCopy)
+    addingNumberDecition(array, arrayCopy, zerosPos)
+    array = cloneDeep(arrayCopy)
+    reloadArray(arrayCopy)
+  }
+  if(gameOverAlert(array)) openModal()
+  manageClasses(boxes)
+  displayScore.innerText = scoreCounter
+  modalScore.innerText = scoreCounter
+});
 
 
 
