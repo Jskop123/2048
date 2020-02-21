@@ -281,10 +281,12 @@ newGame.addEventListener('click', () => {
   array = cloneDeep(reset)
 })
 
+const container = document.querySelector('.container')
 
-const hammertime = new Hammer(window);
-hammertime.on('pan', function(ev) {
-	if(ev.additionalEvent === 'panleft'){
+const hammertime = new Hammer(container);
+hammertime.on('swipe', function(ev) {
+  console.log(ev.direction)
+	if(ev.direction === 2){
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsLeft(rmZeros)
     const result = swipeLeft(sumEls)
@@ -295,7 +297,7 @@ hammertime.on('pan', function(ev) {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(ev.additionalEvent === 'panright'){
+  if(ev.direction === 4){
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsRight(rmZeros)
     const result = swipeRight(sumEls)
@@ -306,7 +308,7 @@ hammertime.on('pan', function(ev) {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(ev.additionalEvent === 'panup'){
+  if(ev.direction === 1){
     const transposed = transpose(arrayCopy)
     const rmZeros = removedZeros(transposed)
     const sumEls = summedElementsLeft(rmZeros)
@@ -318,7 +320,7 @@ hammertime.on('pan', function(ev) {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(ev.additionalEvent === 'pandown'){
+  if(ev.direction === 3){
     const transposed = transpose(arrayCopy)
     const rmZeros = removedZeros(transposed)
     const sumEls = summedElementsRight(rmZeros)
