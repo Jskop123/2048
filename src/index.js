@@ -287,7 +287,6 @@ const hammertime = new Hammer(container);
 hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 hammertime.on('swipe', function(ev) {
-  console.log(ev.direction)
 	if(ev.direction === 2){
     const rmZeros = removedZeros(arrayCopy)
     const sumEls = summedElementsLeft(rmZeros)
