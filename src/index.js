@@ -284,6 +284,8 @@ newGame.addEventListener('click', () => {
 const container = document.querySelector('.container')
 
 const hammertime = new Hammer(container);
+hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
 hammertime.on('swipe', function(ev) {
   console.log(ev.direction)
 	if(ev.direction === 2){
@@ -308,7 +310,7 @@ hammertime.on('swipe', function(ev) {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(ev.direction === 1){
+  if(ev.direction === 8){
     const transposed = transpose(arrayCopy)
     const rmZeros = removedZeros(transposed)
     const sumEls = summedElementsLeft(rmZeros)
@@ -320,7 +322,7 @@ hammertime.on('swipe', function(ev) {
     array = cloneDeep(arrayCopy)
     reloadArray(arrayCopy)
   }
-  if(ev.direction === 3){
+  if(ev.direction === 16){
     const transposed = transpose(arrayCopy)
     const rmZeros = removedZeros(transposed)
     const sumEls = summedElementsRight(rmZeros)
