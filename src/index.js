@@ -6,6 +6,7 @@ import './css/modal.css'
 
 import resetGame from './js/resetGame'
 import { openModal, closeModal } from './js/modal'
+import winGame from './js/winGame'
 import {
   removedZeros,
   summedElementsLeft,
@@ -24,8 +25,8 @@ import {
 closeModal()
 
 let array = [
-  [0, 0, 2, 0],
   [0, 0, 0, 0],
+  [0, 0, 2, 0],
   [0, 0, 0, 0],
   [0, 0, 0, 0]
 ]
@@ -34,15 +35,17 @@ let arrayCopy = cloneDeep(array)
 
 const boxes = [...document.querySelectorAll('.box')]
 
-const newGameButton = document.querySelector('#newGame')
-newGameButton.addEventListener('click', () => {
+const newGameButton = document.querySelectorAll('.newGame')
+const resetGameFunc = () => {
   const resetArray = resetGame()
   reloadArray(resetArray)
   arrayCopy = cloneDeep(resetArray)
   manageClasses(boxes)
   resetScore()
   countScore()
-})
+}
+newGameButton[0].addEventListener('click', resetGameFunc)
+newGameButton[1].addEventListener('click', resetGameFunc)
 
 const reloadArray = (array) => {
   const iterableVar = array.flat(1)
@@ -153,6 +156,7 @@ const moveDown = () => {
 }
 
 manageClasses(boxes)
+
 window.addEventListener('keydown', event => {
   if(event.keyCode === 37 ||event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 40) event.preventDefault()
 })
@@ -164,6 +168,7 @@ window.addEventListener('keyup', event => {
   if (gameOverAlert(array)) openModal()
   manageClasses(boxes)
   countScore()
+  winGame(array)
 })
 
 const container = document.querySelector('.container')
@@ -178,5 +183,6 @@ hammertime.on('swipe', function (ev) {
   if (gameOverAlert(array)) openModal()
   manageClasses(boxes)
   countScore()
+  winGame(array)
 });
 

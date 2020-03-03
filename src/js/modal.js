@@ -4,7 +4,7 @@ const openModal = () => {
 }
 const closeModal = () => {
   window.addEventListener('click', (event) => {
-    if(event.target.id === 'modal' || event.target.id === 'close'){
+    if(event.target.id === 'modal' || event.target.id === 'close' || event.target.className === 'newGame'){
       modal.classList = 'close'
     }
   })

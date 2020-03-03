@@ -9,7 +9,7 @@ body {
     width: 100%;
     height: 100vw;
   }
-  #newGame {
+  .newGame {
     margin: 0 10%;
     padding: 5px 10px;
     font-size: 16px;
@@ -33,7 +33,7 @@ body {
     width: 50%;
     height: 50vw;
   }
-  #newGame {
+  .newGame {
     margin: 0 5%;
     padding: 0 20px;
     font-size: 16px;
@@ -59,7 +59,7 @@ body {
     width: 30%;
     height: 30vw;
   }
-  #newGame {
+  .newGame {
     margin: 0 5%;
     padding: 0 20px;
     font-size: 16px;
@@ -116,7 +116,7 @@ header {
   font-size: 16px;
 }
 
-#newGame {
+.newGame {
   background-color: #f00;
   color: #F9F6F2;
   height: 50%;
@@ -126,7 +126,8 @@ header {
   letter-spacing: .5px;
 }
 
-#newGame:hover {
+.newGame:hover,
+.newGame:focus {
   background-color: #f44;
   color: #F9F8F4;
   cursor: pointer;
