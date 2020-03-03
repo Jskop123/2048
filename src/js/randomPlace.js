@@ -9,14 +9,4 @@ const cordinate = () => {
   return cordinates
 }
 
-const randomPlace = () => {
-  const firstCordinate = cordinate()
-  const secondCordinate = cordinate()
-  if(JSON.stringify(firstCordinate) === JSON.stringify(secondCordinate)){
-    secondCordinate.x = Math.abs(secondCordinate.x - 1)  
-  }
-  const cordinates = [firstCordinate, secondCordinate] 
-  return cordinates
-}
-
-export default randomPlace
+export default cordinate

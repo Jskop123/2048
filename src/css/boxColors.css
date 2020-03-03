@@ -1,11 +1,4 @@
-.box {
-  border: 5px solid #BBADA0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.5em;
-  font-weight: 700;
-}
+
 .newBox {
   transition: .5s;
 }

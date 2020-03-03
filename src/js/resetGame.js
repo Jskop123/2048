@@ -1,11 +1,11 @@
-const resetGame = array => {
-  let copy = [...array]
-  const reset = copy.map(item => {
-    for(let i=0; i<4; i++){
-      item[i] = 0
-    }
-  })
-  return reset
+const resetGame = () => {
+  const array = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 2, 0]
+  ]
+  return array
 }
 
 export default resetGame
