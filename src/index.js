@@ -156,6 +156,8 @@ const moveDown = () => {
 }
 
 manageClasses(boxes)
+let scoreStorage = 0
+
 
 window.addEventListener('keydown', event => {
   if(event.keyCode === 37 ||event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 40) event.preventDefault()
