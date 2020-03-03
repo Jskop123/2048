@@ -12,12 +12,12 @@
 <body>
   <header>
     <h1>2048</h1>
-      <div id="actualScore" class="score">
-        <h3>Wynik: </h3>
-        <h2>0</h2>
-      </div>
+    <button id="newGame">Nowa Gra</button>
+    <div id="actualScore" class="score">
+      <h3>Wynik: </h3>
+      <h2>0</h2>
+    </div>
   </header>
-  <button id="newGame">Nowa Gra</button>
   
   <div class="container">
     <div class="box"></div>
@@ -40,6 +40,16 @@
     <div class="box"></div>
     <div class="box"></div>
   </div>
+
+  <div id="readme">
+    <h3>Jak grać</h3>
+    <p>Użyj strzałek lub palca do porzuszania bloków. Jeśli sąsiadujące bloki są sobie równe kolejny ruch doda je.</p>
+  </div>
+
+  <footer>
+    <h3>Jakub Skop 2020</h3>
+    <p>Interpretacja popularnej gry w 2048 stworzona w języku JavaScript z wykorzystaniem bibliotek  <a href="https://lodash.com/">Lodash</a> i  <a href="https://hammerjs.github.io/">Hammerjs</a>.</p>
+  </footer>
 
   <div id="modal" class="close">
     <div id="modal-content">
