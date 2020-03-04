@@ -122,10 +122,17 @@ let scoreCounter = 0
 const displayScore = document.querySelector('#actualScore h2')
 const modalScore = document.querySelector('#modal-content h2')
 const storageStore = document.querySelector('#storageScore')
-storageStore.innerText = localStorage.getItem('bestScore')
+try {
+  if(localStorage.getItem('bestScore')) storageStore.innerText = localStorage.getItem('bestScore')
+  else storageStore.innerText = '0'
+}
+catch (error) {
+  storageStore.innerText = '0'
+}
+
 
 const countScore = () => {
-  if(scoreCounter > localStorage.getItem('bestScore')){
+  if(scoreCounter >= localStorage.getItem('bestScore')){
     localStorage.setItem('bestScore', scoreCounter)
   }
   storageStore.innerText = localStorage.getItem('bestScore')

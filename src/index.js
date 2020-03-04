@@ -108,6 +108,7 @@ const manageClasses = elements => {
   })
 }
 
+
 const moveLeft = () => {
   const rmZeros = removedZeros(arrayCopy)
   const sumEls = summedElementsLeft(rmZeros)
