@@ -14,6 +14,16 @@ body {
     padding: 5px 10px;
     font-size: 16px;
   }
+  #scoreTable {
+    width: 80%;
+    margin-right: 10px;
+  }
+  #bestScore {
+    flex-wrap: wrap;
+  }
+  #bestScore h3 {
+    width: 50%;
+  }
   #readme {
     width: 90%;
   }  
@@ -30,16 +40,16 @@ body {
 }
 @media (min-width: 501px) and (max-width: 1025px) {
   .container {
-    width: 50%;
-    height: 50vw;
+    width: 40%;
+    height: 40vw;
   }
   .newGame {
     margin: 0 5%;
     padding: 0 20px;
     font-size: 16px;
   }
-  #actualScore {
-    margin-right: 5%;
+  #scoreTable {
+    width: 26%; 
   }
   #readme {
     padding-top: 20%;
@@ -55,6 +65,7 @@ body {
   }
   footer p {
     font-size: 1em;
+    padding-bottom: 20px;
   }
 }
 @media (min-width: 1026px) {
@@ -66,6 +77,9 @@ body {
     margin: 0 5%;
     padding: 0 20px;
     font-size: 16px;
+  }
+  #scoreTable {
+   width: 100%; 
   }
   #actualScore {
     margin-right: 5%;
@@ -114,19 +128,22 @@ header {
 }
 
 #actualScore {
-  text-align: center;
-  height: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #actualScore h3 {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #bestScore {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #bestScore h3 {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .newGame {
