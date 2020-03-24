@@ -26,16 +26,16 @@ closeModal()
 
 let array = [
   [0, 0, 0, 0],
-  [0, 0, 2, 0],
   [0, 0, 0, 0],
-  [0, 0, 0, 0]
+  [0, 0, 0, 0],
+  [0, 0, 2, 0]
 ]
 
 let arrayCopy = cloneDeep(array)
 
 const boxes = [...document.querySelectorAll('.box')]
 
-const newGameButton = document.querySelectorAll('.newGame')
+const newGameButton = [...document.querySelectorAll('.newGame')]
 const resetGameFunc = () => {
   const resetArray = resetGame()
   reloadArray(resetArray)
@@ -44,8 +44,7 @@ const resetGameFunc = () => {
   resetScore()
   countScore()
 }
-newGameButton[0].addEventListener('click', resetGameFunc)
-newGameButton[1].addEventListener('click', resetGameFunc)
+newGameButton.forEach(button => button.addEventListener('click', resetGameFunc))
 
 const reloadArray = (array) => {
   const iterableVar = array.flat(1)
@@ -108,7 +107,6 @@ const manageClasses = elements => {
   })
 }
 
-
 const moveLeft = () => {
   const rmZeros = removedZeros(arrayCopy)
   const sumEls = summedElementsLeft(rmZeros)
@@ -156,9 +154,13 @@ const moveDown = () => {
   reloadArray(arrayCopy)
 }
 
-manageClasses(boxes)
-let scoreStorage = 0
+const eventsFunctions = () => {
+  manageClasses(boxes)
+  countScore()
+  winGame(array)
+}
 
+manageClasses(boxes)
 
 window.addEventListener('keydown', event => {
   if(event.keyCode === 37 ||event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 40) event.preventDefault()
@@ -169,9 +171,7 @@ window.addEventListener('keyup', event => {
   if (event.keyCode === 38) moveUp()
   if (event.keyCode === 40) moveDown()
   if (gameOverAlert(array)) openModal()
-  manageClasses(boxes)
-  countScore()
-  winGame(array)
+  eventsFunctions()
 })
 
 const container = document.querySelector('.container')
@@ -184,8 +184,6 @@ hammertime.on('swipe', function (ev) {
   if (ev.direction === 8) moveUp()
   if (ev.direction === 16) moveDown()
   if (gameOverAlert(array)) openModal()
-  manageClasses(boxes)
-  countScore()
-  winGame(array)
+  eventsFunctions()
 });
 

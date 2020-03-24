@@ -14,6 +14,9 @@ body {
     padding: 5px 10px;
     font-size: 16px;
   }
+  .score {
+    height: 1vh;
+  }
   #scoreTable {
     width: 80%;
     margin-right: 10px;
@@ -21,8 +24,12 @@ body {
   #bestScore {
     flex-wrap: wrap;
   }
-  #bestScore h3 {
+  .score h3 {
     width: 50%;
+    font-size: .4em;
+  }
+  .score h2 {
+    font-size: .8em;
   }
   #readme {
     width: 90%;
@@ -52,10 +59,13 @@ body {
     width: 26%; 
   }
   #readme {
-    padding-top: 20%;
+    padding-top: 10%;
     padding-bottom: 5%;
     width: 70%;
   }  
+  .score {
+    height: 7vh;
+  }
   footer {
     width: 70%;
   }
@@ -78,8 +88,11 @@ body {
     padding: 0 20px;
     font-size: 16px;
   }
+  .score {
+    height: 7vh;
+  }
   #scoreTable {
-   width: 100%; 
+    width: 26%; 
   }
   #actualScore {
     margin-right: 5%;
@@ -126,26 +139,14 @@ header {
   justify-content: center;
   align-items: center;
 }
-
-#actualScore {
+.score {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-#actualScore h3 {
+.score h3 {
   font-size: 14px;
 }
-
-#bestScore {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#bestScore h3 {
-  font-size: 14px;
-}
-
 .newGame {
   background-color: #f00;
   color: #F9F6F2;

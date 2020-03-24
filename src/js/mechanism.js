@@ -117,7 +117,6 @@ const addFollowingNr = (zeros, array) => {
   return array
 }
 
-
 let scoreCounter = 0
 const displayScore = document.querySelector('#actualScore h2')
 const modalScore = document.querySelector('#modal-content h2')
@@ -129,7 +128,6 @@ try {
 catch (error) {
   storageStore.innerText = '0'
 }
-
 
 const countScore = () => {
   if(scoreCounter >= localStorage.getItem('bestScore')){
