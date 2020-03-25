@@ -25,10 +25,10 @@ import {
 closeModal()
 
 let array = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 2, 0]
+  [4, 2, 4, 2],
+  [2, 4, 2, 4],
+  [8, 2, 4, 2],
+  [2, 4, 2, 4]
 ]
 
 let arrayCopy = cloneDeep(array)

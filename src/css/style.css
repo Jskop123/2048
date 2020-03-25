@@ -5,31 +5,25 @@ body {
   height: 100vh;
 }
 @media (max-width: 500px) {
+  header h1 {
+    margin-left: 5px;
+  }
   .container {
     width: 100%;
     height: 100vw;
   }
   .newGame {
     margin: 0 5%;
-    padding: 5px 10px;
-    font-size: 16px;
+    padding: 10px 20px;
   }
   .score {
-    height: 1vh;
-  }
-  #scoreTable {
-    width: 80%;
-    margin-right: 10px;
-  }
-  #bestScore {
-    flex-wrap: wrap;
+    margin-right: 5px;
   }
   .score h3 {
-    width: 50%;
-    font-size: .4em;
+    font-size: .7em;
   }
   .score h2 {
-    font-size: .8em;
+    font-size: .9em;
   }
   #readme {
     width: 90%;
@@ -52,11 +46,7 @@ body {
   }
   .newGame {
     margin: 0 5%;
-    padding: 0 20px;
-    font-size: 16px;
-  }
-  #scoreTable {
-    width: 26%; 
+    padding: 20px 30px;
   }
   #readme {
     padding-top: 10%;
@@ -64,7 +54,13 @@ body {
     width: 70%;
   }  
   .score {
-    height: 7vh;
+    height: 4vh;
+  }
+  .score h3 {
+    font-size: .9em;
+  }
+  .score h2 {
+    font-size: 1.1em;
   }
   footer {
     width: 70%;
@@ -85,17 +81,16 @@ body {
   }
   .newGame {
     margin: 0 5%;
-    padding: 0 20px;
-    font-size: 16px;
+    padding: 20px 35px;
   }
   .score {
-    height: 7vh;
+    height: 5vh;
   }
-  #scoreTable {
-    width: 26%; 
+  .score h3 {
+    font-size: 1em;
   }
-  #actualScore {
-    margin-right: 5%;
+  .score h2 {
+    font-size: 1.2em;
   }
   #readme {
     padding-top: 10%;
@@ -115,6 +110,9 @@ body {
   }
 }
 
+header {
+  color: #4B4E4D;
+}
 .container {
   box-sizing: border-box;
   background-color: #CDC1B4;
@@ -125,15 +123,14 @@ body {
   border: 5px solid #BBADA0;
 }
 .box {
-  font-size: 2.5em;
-  border: 5px solid #BBADA0;
+  font-size: 2em;
+  border: 4px solid #BBADA0;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
 }
 header {
-  width: 100%;
   display: flex;
   height: 20vh;
   justify-content: center;
@@ -143,36 +140,29 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.score h3 {
-  font-size: 14px;
+  color: #4B4E4D;
 }
 .newGame {
-  background-color: #f00;
+  background-color: #FE4A49;
   color: #F9F6F2;
-  height: 50%;
   border-radius: 2px;
   border: transparent;
   font-weight: 700;
   letter-spacing: .5px;
 }
-
 .newGame:hover,
 .newGame:focus {
   background-color: #f44;
   color: #F9F8F4;
   cursor: pointer;
 }
-
 #readme {
   display: block;
   margin: auto;
 }
-
 #readme h3 {
   color: #776E65;
 }
-
 footer {
   border-top: 2px solid #776E65;
   display: block;
